@@ -1,0 +1,14 @@
+type Query {
+  lists: [PineList]
+  foo: String
+}
+
+type PineList {
+  id: ID
+  name: String
+  year: Int
+}
+
+type Mutation {
+  createList(name: String!): PineList
+}

@@ -1,0 +1,52 @@
+buildscript {
+    ext {
+        springCloudContractVersion = '2.0.1.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.springframework.cloud:spring-cloud-contract-gradle-plugin:$springCloudContractVersion"
+    }
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-spring'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'spring-cloud-contract'
+apply from: "${rootDir.toPath()}/kotlin.gradle"
+
+dependencies {
+    compile project(':domain')
+    compile project(':services')
+    compile project(':integrations')
+
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('com.fasterxml.jackson.module:jackson-module-kotlin')
+    compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    compile("org.jetbrains.kotlin:kotlin-reflect")
+    compile 'com.h2database:h2:1.4.195'
+
+    implementation 'com.graphql-java:graphql-java:11.0'
+    implementation 'com.graphql-java:graphql-java-spring-boot-starter-webmvc:1.0'
+    implementation 'com.google.guava:guava:26.0-jre'
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.cloud:spring-cloud-starter-contract-verifier')
+}
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+        mavenBom "org.springframework.cloud:spring-cloud-contract-dependencies:${springCloudContractVersion}"
+    }
+}
+
+group = 'com.pinelist'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+contracts {
+    baseClassForTests = 'com.pinelist.ContractVerifierBase'
+}

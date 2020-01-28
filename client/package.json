@@ -1,0 +1,48 @@
+{
+  "name": "pinelist",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "apollo-boost": "^0.1.28",
+    "axios": "^0.18.0",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0",
+    "graphql": "^14.1.1",
+    "mobx": "^5.5.2",
+    "mobx-react": "^5.3.6",
+    "react": "^16.6.0",
+    "react-apollo": "^2.4.1",
+    "react-dom": "^16.6.0",
+    "react-scripts": "2.0.5",
+    "spring-cloud-contract-json-reader": "^1.0.2",
+    "testcafe": "^0.23.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "npm run start-mock & react-scripts test",
+    "test-ci": "CI=true react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "features": "testcafe chrome src/feature-tests",
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix",
+    "start-mock": "wiremock --root-dir ../api/build/stubs/META-INF/com.pinelist/api/0.0.1-SNAPSHOT"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^21.26.2",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1",
+    "wiremock-standalone": "^2.20.0-1"
+  }
+}
