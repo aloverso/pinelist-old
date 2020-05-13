@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
 	id("org.springframework.boot")
 	id("io.spring.dependency-management")
@@ -7,12 +5,20 @@ plugins {
 	kotlin("plugin.spring")
 }
 
-//val developmentOnly by configurations.creating
-//configurations {
-//	runtimeClasspath {
-//		extendsFrom(developmentOnly)
-//	}
-//}
+tasks.register<Copy>("copyNpmBuild") {
+	dependsOn(":web:build")
+	from("${projectDir}/../web/build")
+	into("src/main/resources/static")
+}
+
+tasks.assemble {
+	dependsOn("copyNpmBuild")
+	mustRunAfter("copyNpmBuild")
+}
+
+tasks.clean {
+	delete(fileTree("src/main/resources/static/"))
+}
 
 repositories {
 	mavenCentral()
@@ -35,4 +41,3 @@ dependencies {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
-
