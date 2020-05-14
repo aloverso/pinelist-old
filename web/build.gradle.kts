@@ -12,6 +12,7 @@ node {
 }
 
 tasks.named<NpmTask>("npm_run_build") {
+    setEnvironment(mapOf("CI" to "true"))
     inputs.files(fileTree("public"))
     inputs.files(fileTree("src"))
     inputs.file("package.json")
