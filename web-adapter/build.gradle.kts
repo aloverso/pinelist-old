@@ -1,13 +1,12 @@
 plugins {
 	kotlin("jvm")
 	kotlin("plugin.spring")
+	id("org.springframework.cloud.contract") version "2.2.2.RELEASE"
 }
 
 dependencyManagement {
 	imports {
-		mavenBom(
-				org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
-		)
+		mavenBom(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
 	}
 }
 
@@ -20,5 +19,13 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework.boot:spring-boot-starter-test") {
+		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
+	}
+	testImplementation("io.rest-assured:spring-web-test-client")
+	testImplementation("org.springframework.cloud:spring-cloud-starter-contract-verifier:2.2.2.RELEASE")
+}
+
+contracts {
+	baseClassForTests.set("com.pinelist.webadapter.ContractsBaseTest")
 }

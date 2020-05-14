@@ -11,6 +11,6 @@ class WebController {
 
     @GetMapping("/hello")
     fun hello(): String {
-        return sayHello();
+        return sayHello()
     }
 }
