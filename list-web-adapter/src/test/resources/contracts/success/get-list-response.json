@@ -1,0 +1,17 @@
+{
+  "outcome": "SUCCESS",
+  "data": {
+    "id": "12345",
+    "name": "My Cool Birthday List",
+    "items": [
+      {
+        "name": "socks",
+        "id": "1"
+      },
+      {
+        "name": "coffee",
+        "id": "2"
+      }
+    ]
+  }
+}

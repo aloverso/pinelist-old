@@ -5,6 +5,12 @@ os: linux
 dist: trusty
 jdk: oraclejdk8
 
+before_script:
+  - psql -c 'create database pinelistlocal;' -U postgres
+
 script:
   - ./gradlew build
   - ./scripts/feature-tests-jar.sh
+
+services:
+  - postgresql

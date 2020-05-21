@@ -1,10 +1,4 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-//
-//buildscript {
-//	repositories {
-//		mavenCentral()
-//	}
-//}
 
 plugins {
 	id("org.springframework.boot") version "2.2.6.RELEASE" apply false

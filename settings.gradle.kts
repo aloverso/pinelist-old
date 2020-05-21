@@ -1,2 +1,2 @@
 rootProject.name = "pinelist"
-include("web", "web-adapter", "pinelist-deployable", "list-policy")
+include("web", "list-policy", "list-sql-adapter", "list-web-adapter", "pinelist-deployable")

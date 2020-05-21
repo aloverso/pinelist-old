@@ -11,7 +11,7 @@ kill $(lsof -i:${APP_PORT} -t)
 set -e
 
 echo "starting app"
-java -jar pinelist-deployable/build/libs/pinelist-deployable-1.0.0.jar -Dserver.port=${APP_PORT} &
+java -jar pinelist-deployable/build/libs/pinelist-deployable-1.0.0.jar -Dserver.port=${APP_PORT} -Dspring.profiles.active=local &
 while ! echo exit | nc localhost ${APP_PORT}; do sleep 3; done
 
 echo "app started"
