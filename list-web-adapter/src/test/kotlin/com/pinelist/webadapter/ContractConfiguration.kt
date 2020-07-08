@@ -3,6 +3,7 @@ package com.pinelist.webadapter
 import com.pinelist.listpolicy.AddItem
 import com.pinelist.listpolicy.AddItemRequest
 import com.pinelist.listpolicy.CreateList
+import com.pinelist.listpolicy.FindAll
 import com.pinelist.listpolicy.FindList
 import com.pinelist.listpolicy.models.ErrorMessage
 import com.pinelist.listpolicy.models.Item
@@ -59,6 +60,17 @@ class ContractConfiguration {
                     items = listOf(
                             Item(id = "3", name = addItemRequest.name)
                     )
+            ))
+        }
+    }
+
+    @Bean
+    @Qualifier("findAll")
+    fun findAllStub(): FindAll {
+        return { Success(listOf(
+                Pinelist(id = "12345", name = "My Cool Birthday List", items = emptyList()),
+                Pinelist(id = "45678", name = "George's Birthday", items = emptyList()),
+                Pinelist(id = "98765", name = "Mother's Day", items = emptyList())
             ))
         }
     }

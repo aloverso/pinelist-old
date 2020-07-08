@@ -5,7 +5,7 @@ Contract.make {
     description "should error gracefully for get list items"
     request{
         method GET()
-        url "/api/list/doesnotexist"
+        url "/api/lists/doesnotexist"
     }
     response {
         body(this.getClass().getResource("/get-list-error-response.json").text)

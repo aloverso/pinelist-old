@@ -1,23 +1,22 @@
 import React, {useEffect, useState} from 'react';
-import './App.css';
 import axios, {AxiosResponse} from 'axios';
+import {Family} from "./list/Family";
+import {findAllLists, findList} from "./list/ListClient";
 
 export const App = () => {
 
-  const [greeting, setGreeting] = useState("");
-
-  useEffect(() => {
-    axios.get('/api/hello')
-        .then((response: AxiosResponse<string>) => {
-            setGreeting(response.data)
-        })
-  });
+  // const [greeting, setGreeting] = useState("");
+  //
+  // useEffect(() => {
+  //   axios.get('/api/hello')
+  //       .then((response: AxiosResponse<string>) => {
+  //           setGreeting(response.data)
+  //       })
+  // });
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>The server says: {greeting}</h1>
-      </header>
-    </div>
+    <>
+        <Family listClient={{findAllLists: findAllLists, findList: findList}}/>
+    </>
   );
 };

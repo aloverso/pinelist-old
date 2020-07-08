@@ -6,7 +6,7 @@ Contract.make {
     request{
         method POST()
         headers { contentType(applicationJson()) }
-        url "/api/list/create"
+        url "/api/lists/create"
         body(this.getClass().getResource("/create-list-request.json").text)
     }
     response {

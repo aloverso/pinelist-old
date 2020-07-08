@@ -14,9 +14,12 @@ class FakePinelistRepository: PinelistRepository {
 
     private var pinelists: MutableMap<String, Pinelist> = HashMap()
 
+    override fun findAll(): TwoTrack<List<Pinelist>> {
+        return Success(pinelists.values.toList())
+    }
+
     override fun findById(id: String): TwoTrack<Pinelist> {
         val pinelist = pinelists[id] ?: return Failure(ErrorMessage.LIST_NOT_FOUND)
-
         return Success(pinelist)
     }
 

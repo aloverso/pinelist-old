@@ -47,4 +47,12 @@ abstract class PinelistRepositoryTest {
         assertThat(savedPinelistWithItem.items[0].name).isEqualTo("some item name")
         assertThat(foundPinelist.items[0].name).isEqualTo("some item name")
     }
+
+    @Test
+    fun `finds all pinelists`() {
+        val savedPinelist1 = getSuccess(repository.save("some name"))
+        val savedPinelist2 = getSuccess(repository.save("some other name"))
+
+        assertThat(getSuccess(repository.findAll())).containsExactlyInAnyOrder(savedPinelist1, savedPinelist2)
+    }
 }

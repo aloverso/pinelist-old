@@ -30,14 +30,14 @@ data class PinelistEntity(
         return Pinelist(
                 id = this.id,
                 name = this.name,
-                items = this.items.map { Item(id = it.itemId, name = it.name) }
+                items = this.items.map { Item(id = it.id, name = it.name) }
         )
     }
 }
 
 @Entity(name = "items")
 data class ItemEntity(
-        @Id var itemId: String = "",
+        @Id var id: String = "",
         var name: String = "",
 
         @ManyToOne(fetch = FetchType.LAZY)
@@ -52,6 +52,11 @@ class SqlPinelistRepository(
         val jpaPinelistRepository: JpaPinelistRepository,
         val jpaItemRepository: JpaItemRepository
 ) : PinelistRepository {
+
+    override fun findAll(): TwoTrack<List<Pinelist>> {
+        return Success(jpaPinelistRepository.findAll().map { it.toPinelist() })
+    }
+
     override fun findById(id: String): TwoTrack<Pinelist> {
         val found = jpaPinelistRepository.findById(id)
         if (found.isPresent) {
@@ -74,7 +79,7 @@ class SqlPinelistRepository(
     override fun saveItem(addItemRequest: AddItemRequest): TwoTrack<Pinelist> {
         val matchingPinelist: PinelistEntity = jpaPinelistRepository.findById(addItemRequest.pinelistId).get()
         val entityToSave = ItemEntity(
-                itemId = generateRandomId(),
+                id = generateRandomId(),
                 name = addItemRequest.name,
                 pinelist = matchingPinelist
         )

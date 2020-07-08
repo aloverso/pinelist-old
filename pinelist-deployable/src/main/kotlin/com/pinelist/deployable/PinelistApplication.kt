@@ -1,9 +1,12 @@
 package com.pinelist
 
+import arrow.core.Either
 import com.pinelist.listpolicy.AddItem
 import com.pinelist.listpolicy.CreateList
+import com.pinelist.listpolicy.FindAll
 import com.pinelist.listpolicy.FindList
 import com.pinelist.listpolicy.addItemFactory
+import com.pinelist.listpolicy.models.Pinelist
 import com.pinelist.listpolicy.ports.PinelistRepository
 import com.pinelist.listpolicy.railway.convertToTwoTrack
 import com.pinelist.sqladapter.JpaItemRepository
@@ -45,6 +48,12 @@ class PinelistApplication {
 			pinelistRepository: PinelistRepository
 	): FindList {
 		return convertToTwoTrack { id: String -> pinelistRepository.findById(id)}
+	}
+
+	@Bean
+	@Qualifier("findAll")
+	fun findAllStub(pinelistRepository: PinelistRepository): FindAll {
+		return { pinelistRepository.findAll() }
 	}
 }
 
